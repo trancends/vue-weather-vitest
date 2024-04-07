@@ -1,8 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import GetLocation from './components/GetLocation.vue'
+</script>
 <template>
-  <header>
-    <h1>Hello Vue</h1>
-  </header>
+  <GetLocation />
 </template>
 
 <style scoped></style>

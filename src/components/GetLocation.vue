@@ -28,5 +28,5 @@ onMounted(async () => {
 
 <template>
   <div v-if="coords && !geolocationBlockedByUser">{{ coords.latitude }} {{ coords.longitude }}</div>
-  <div v-if="geolocationBlockedByUser">User denied access</div>
+  <div v-if="geolocationBlockedByUser">User denied</div>
 </template>
