@@ -44,7 +44,7 @@ const fetchWeather = async (coords: Coords): Promise<WeatherData> => {
       import.meta.env.VITE_APP_WEATHER_API_KEY
     }&q=${q}&lang=nl`
   )
-  const data = (await res) && res.json()
+  const data = await res.json()
   return data
 }
 
