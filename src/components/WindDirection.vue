@@ -6,7 +6,8 @@ interface Props {
 const props = defineProps<Props>()
 
 const windStyle = computed(() => ({
-  transform: 'rotate(' + props.degrees + 'deg)'
+  transform: 'rotate(' + props.degrees + 'deg)',
+  display: 'inline-block'
 }))
 </script>
 <template>
