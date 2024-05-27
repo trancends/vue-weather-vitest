@@ -11,7 +11,7 @@ const coords: Ref<Geolocation | undefined> = ref()
 const geolocationBlockedByUser: Ref<boolean> = ref(false)
 
 const getGeolocation = async (): Promise<void> => {
-  navigator.geolocation.getCurrentPosition(
+  navigator?.geolocation?.getCurrentPosition(
     async (position: { coords: Geolocation }) => {
       coords.value = position.coords
     },
