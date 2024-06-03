@@ -36,16 +36,21 @@ const props = defineProps<Props>()
 
 const data: Ref<WeatherData | undefined> = ref()
 
-const fetchWeather = async (coords: Coords): Promise<WeatherData> => {
-  const { latitude, longitude } = coords
-  const q = `${latitude},${longitude}`
-  const res = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=${
-      import.meta.env.VITE_APP_WEATHER_API_KEY
-    }&q=${q}&lang=nl`
-  )
-  const data = await res.json()
-  return data
+const fetchWeather = async (coords: Coords): Promise<WeatherData | undefined> => {
+  try {
+    const { latitude, longitude } = coords
+    const q = `${latitude},${longitude}`
+    const res = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=${
+        import.meta.env.VITE_APP_WEATHER_API_KEY
+      }&q=${q}&lang=en`
+    )
+    const data = await res.json()
+    return data
+  } catch (error) {
+    console.error(error)
+    return undefined
+  }
 }
 
 const formatDate = (dateString: Date): string => {
@@ -86,6 +91,6 @@ onMounted(async () => {
         </p>
       </div>
     </article>
-    <div v-else>Loading..</div>
+    <div v-else>Loading...</div>
   </div>
 </template>
