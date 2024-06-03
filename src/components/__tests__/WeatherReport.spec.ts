@@ -86,4 +86,41 @@ describe('WeatherReport', () => {
     expect(wrapper.text()).toContain(mockData.current.wind_kph)
     expect(wrapper.text()).toContain(mockData.current.wind_degree)
   })
+
+  it('displays formats the datetime to a locale format', async () => {
+    const mockDateTime = new Date(2000, 12, 31, 11, 45, 0, 0)
+    vi.setSystemTime(mockDateTime)
+
+    const mockData = {
+      location: {
+        localtime: new Date()
+      },
+      current: {
+        condition: {},
+        wind_degree: 180
+      }
+    }
+
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(mockData)
+      })
+    ) as any
+
+    const wrapper = mount(WeatherReport, {
+      props: {
+        coords: {
+          latitude: 0,
+          longitude: 0
+        }
+      }
+    })
+
+    await flushPromises()
+
+    const localtime = wrapper.find('[data-testid=localtime]')
+
+    expect(localtime.text()).toEqual('January 31, 2001 at 11:45 AM')
+    vi.useRealTimers()
+  })
 })
