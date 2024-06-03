@@ -46,9 +46,9 @@ describe('GetLocation', () => {
 
     mockNavigator.geolocation.getCurrentPosition = mockGeoLocation
 
-    const wrapper = shallowMount(GetLocation)
+    const wrapper = await shallowMount(GetLocation)
     // @ts-ignore
     expect(wrapper.vm.geolocationBlockedByUser).toEqual(true)
-    // expect(wrapper.html()).toContain('User denied access')
+    expect(wrapper.html()).toContain('User denied access')
   })
 })
